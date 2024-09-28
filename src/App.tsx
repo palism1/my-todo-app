@@ -7,7 +7,7 @@ interface Task {
 }
 
 const App: React.FC = () => {
-  const [Tasks, setTasks] = useState<Task[]>([]);
+  const [tasks, setTasks] = useState<Task[]>([]);
   const [inputValue, setInputValue] = useState<string>("");
 
   const addTask = () => {
@@ -17,22 +17,22 @@ const App: React.FC = () => {
       text: inputValue,
       completed: false,
     };
-    setTasks([...Tasks, newTask]);
+    setTasks([...tasks, newTask]);
     setInputValue("");
   };
 
   // Toggle the completion status of a to do
   const toggleTask = (id: number) => {
     setTasks(
-      Tasks.map((Task) =>
-        Task.id === id ? { ...Task, completed: !Task.completed } : Task
+      tasks.map((task) =>
+        task.id === id ? { ...task, completed: !task.completed } : task
       )
     );
   };
 
   // Delete a to do
   const deleteTask = (id: number) => {
-    setTasks(Tasks.filter((Task) => Task.id !== id));
+    setTasks(tasks.filter((task) => task.id !== id));
   };
 
   // Handle key down in the input field 
@@ -55,14 +55,14 @@ const App: React.FC = () => {
 
       {/* Displaying the Tasks */}
       <ul>
-        {Tasks.map((Task) => (
-          <li key={Task.id}>
-            {Task.text}
-            <button onClick={() => toggleTask(Task.id)}>
-              {Task.completed ? "Undo" : "Complete"}
+        {tasks.map((task) => (
+          <li key={task.id}>
+            {task.text}
+            <button onClick={() => toggleTask(task.id)}>
+              {task.completed ? "Undo" : "Complete"}
             </button>
             {/* Here's the key part */}
-            <button onClick={() => deleteTask(Task.id)}>Delete</button> 
+            <button onClick={() => deleteTask(task.id)}>Delete</button> 
           </li>
         ))}
       </ul>

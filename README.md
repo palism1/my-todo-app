@@ -1,50 +1,80 @@
-# React + TypeScript + Vite
+### README.md
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# Task Management App
 
-Currently, two official plugins are available:
+This is a simple task management application built using **React** and **TypeScript**. The app allows users to create, track, and manage tasks with features like marking tasks as complete, deleting tasks, and filtering tasks based on their completion status.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Features
 
-## Expanding the ESLint configuration
+- **Add Tasks**: Users can add tasks with a simple input field.
+- **Task List**: Displays the list of tasks, each with options to mark as complete, undo, or delete.
+- **Task Filtering**: Filter tasks to view all, completed, or incomplete tasks.
+- **Task Counter**: Displays the total number of tasks and completed tasks.
+- **Task Summary**: Provides an overview of the tasks, including the percentage completed.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## Components
 
-- Configure the top-level `parserOptions` property like this:
+- **AddTask**: Input field and button for adding new tasks.
+- **TaskItem**: Individual task item with options to toggle completion and delete.
+- **TaskList**: Displays a list of tasks.
+- **TaskFilter**: Provides filtering options (All, Completed, Incomplete).
+- **TaskCounter**: Displays total and completed task count.
+- **TaskSummary**: Shows a summary of completed tasks and overall task progress.
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+## Getting Started
+
+### Prerequisites
+
+- **Node.js**: Make sure you have Node.js installed.
+- **npm** or **yarn**: Package managers to install dependencies.
+
+### Installation
+
+1. Clone the repository:
+
+   ```bash
+   git clone https://github.com/your-username/task-management-app.git
+   ```
+
+2. Navigate to the project directory:
+
+   ```bash
+   cd task-management-app
+   ```
+
+3. Install dependencies:
+
+   ```bash
+   npm install
+   ```
+
+4. Start the development server:
+
+   ```bash
+   npm start
+   ```
+
+## How to Use
+
+- Add tasks using the input field and press "Enter" or click "Add Task."
+- Toggle tasks as complete or incomplete using the "Complete" or "Undo" buttons.
+- Delete tasks with the "Delete" button.
+- Use the filter buttons to view all, completed, or incomplete tasks.
+- View task statistics and summary in the task counter and task summary sections.
+
+## Technologies Used
+
+- **React**: Frontend library for building user interfaces.
+- **TypeScript**: Typed JavaScript to add type safety.
+- **CSS**: Basic styling.
+
+## License
+
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for more details.
+
 ```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+### How to Customize
+- Replace `"your-username"` in the **clone URL** with your actual GitHub username and repository name.
+- Add a more detailed description under each section as you expand your app's features.
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
-
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
