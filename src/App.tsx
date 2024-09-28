@@ -1,61 +1,68 @@
 import { useState } from "react";
 
-interface Todo {
+interface Task {
   id: number;
   text: string;
   completed: boolean;
 }
 
 const App: React.FC = () => {
-  const [todos, setTodos] = useState<Todo[]>([]);
+  const [Tasks, setTasks] = useState<Task[]>([]);
   const [inputValue, setInputValue] = useState<string>("");
 
-  const addTodo = () => {
-    if (!inputValue.trim()) return; // Prevent empty todos
-    const newTodo: Todo = {
+  const addTask = () => {
+    if (!inputValue.trim()) return; // Prevent empty Tasks
+    const newTask: Task = {
       id: Math.random(),
       text: inputValue,
       completed: false,
     };
-    setTodos([...todos, newTodo]);
+    setTasks([...Tasks, newTask]);
     setInputValue("");
   };
 
   // Toggle the completion status of a to do
-  const toggleTodo = (id: number) => {
-    setTodos(
-      todos.map((todo) =>
-        todo.id === id ? { ...todo, completed: !todo.completed } : todo
+  const toggleTask = (id: number) => {
+    setTasks(
+      Tasks.map((Task) =>
+        Task.id === id ? { ...Task, completed: !Task.completed } : Task
       )
     );
   };
 
   // Delete a to do
-  const deleteTodo = (id: number) => {
-    setTodos(todos.filter((todo) => todo.id !== id));
+  const deleteTask = (id: number) => {
+    setTasks(Tasks.filter((Task) => Task.id !== id));
   };
 
+  // Handle key down in the input field 
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") {
+      addTask();
+    }
+  }
   return (
     <div>
-      <h1>Todo List App</h1>
+      <h1>Task List App</h1>
       <input
         type="text"
         value={inputValue}
         onChange={(e) => setInputValue(e.target.value)}
-        placeholder="Add a new todo"
+        onKeyDown={handleKeyDown}
+        placeholder="Add a new Task"
       />
-      <button onClick={addTodo}>Add Todo</button>
+      <button onClick={addTask}>Add Task</button>
 
-      {/* Displaying the Todos */}
+      {/* Displaying the Tasks */}
       <ul>
-        {todos.map((todo) => (
-          <li key={todo.id}>
-            {todo.text}
-            <button onClick={() => toggleTodo(todo.id)}>
-              {todo.completed ? "Undo" : "Complete"}
+        {Tasks.map((Task) => (
+          <li key={Task.id}>
+            {Task.text}
+            <button onClick={() => toggleTask(Task.id)}>
+              {Task.completed ? "Undo" : "Complete"}
             </button>
             {/* Here's the key part */}
-            <button onClick={() => deleteTodo(todo.id)}>Delete</button> 
+            <button onClick={() => deleteTask(Task.id)}>Delete</button> 
           </li>
         ))}
       </ul>
