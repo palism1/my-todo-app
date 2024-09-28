@@ -1,23 +1,38 @@
 import { useState } from "react";
 
-interface Todo{
+interface Todo {
   id: number;
-  text: string; 
-  completed: boolean
+  text: string;
+  completed: boolean;
 }
 
 const App: React.FC = () => {
   const [todos, setTodos] = useState<Todo[]>([]);
-  const [inputValue, setInputValue] = useState<string>('')
+  const [inputValue, setInputValue] = useState<string>("");
 
   const addTodo = () => {
+    if (!inputValue.trim()) return; // Prevent empty todos
     const newTodo: Todo = {
       id: Math.random(),
       text: inputValue,
-      completed: false
+      completed: false,
     };
     setTodos([...todos, newTodo]);
-    setInputValue('');
+    setInputValue("");
+  };
+
+  // Toggle the completion status of a to do
+  const toggleTodo = (id: number) => {
+    setTodos(
+      todos.map((todo) =>
+        todo.id === id ? { ...todo, completed: !todo.completed } : todo
+      )
+    );
+  };
+
+  // Delete a to do
+  const deleteTodo = (id: number) => {
+    setTodos(todos.filter((todo) => todo.id !== id));
   };
 
   return (
@@ -28,8 +43,22 @@ const App: React.FC = () => {
         value={inputValue}
         onChange={(e) => setInputValue(e.target.value)}
         placeholder="Add a new todo"
-        />
-        <button onClick={addTodo}>Add Todo</button>
+      />
+      <button onClick={addTodo}>Add Todo</button>
+
+      {/* Displaying the Todos */}
+      <ul>
+        {todos.map((todo) => (
+          <li key={todo.id}>
+            {todo.text}
+            <button onClick={() => toggleTodo(todo.id)}>
+              {todo.completed ? "Undo" : "Complete"}
+            </button>
+            {/* Here's the key part */}
+            <button onClick={() => deleteTodo(todo.id)}>Delete</button> 
+          </li>
+        ))}
+      </ul>
     </div>
   );
 };
