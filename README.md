@@ -68,13 +68,4 @@ This is a simple task management application built using **React** and **TypeScr
 - **TypeScript**: Typed JavaScript to add type safety.
 - **CSS**: Basic styling.
 
-## License
-
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for more details.
-
-```
-
-### How to Customize
-- Replace `"your-username"` in the **clone URL** with your actual GitHub username and repository name.
-- Add a more detailed description under each section as you expand your app's features.
 
